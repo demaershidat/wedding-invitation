@@ -58,17 +58,31 @@ export class App {
     }
   }
 
-  private startBackgroundMusic(): void {
-    const audio = this.bgMusic()?.nativeElement;
-    if (!audio) {
-      return;
-    }
-    audio.currentTime = this.musicStart;
-    audio.muted = !this.soundOn();
-    audio.play().catch(() => {
-      // Autoplay can be blocked by the browser - the invitation still works without music.
-    });
+private startBackgroundMusic(): void {
+  const audio = this.bgMusic()?.nativeElement;
+
+  if (!audio) {
+    console.error('Background music element not found');
+    return;
   }
+
+  audio.muted = !this.soundOn();
+
+  // Start from 1:15
+  audio.currentTime = this.musicStart;
+
+  const playPromise = audio.play();
+
+  if (playPromise !== undefined) {
+    playPromise
+      .then(() => {
+        console.log('🎵 Background music started successfully');
+      })
+      .catch((error) => {
+        console.error('🎵 Background music failed to play:', error);
+      });
+  }
+}
 
   /** Keeps playback boxed inside the 1:15-2:42 window, looping back to the start once it reaches the end */
   protected onMusicTimeUpdate(): void {

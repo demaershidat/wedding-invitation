@@ -1,6 +1,10 @@
-<!-- preload="none": nothing is fetched until openInvitation() calls play() -->
-<audio #bgMusic src="/audio/background-music.mp3" preload="none" (timeupdate)="onMusicTimeUpdate()" hidden></audio>
-
+<audio
+  #bgMusic
+  src="/audio/background-music.mp3"
+  preload="auto"
+  (timeupdate)="onMusicTimeUpdate()"
+  hidden
+></audio>
 <!-- persists above every section, not just the hero, so the language is always one tap away -->
 <button
   class="lang-toggle"
