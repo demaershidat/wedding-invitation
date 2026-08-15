@@ -1,0 +1,32 @@
+<app-cinematic-section image="/images/swans-heart.jpg" [shimmer]="true" [blur]="true">
+  <span class="cine-motif" aria-hidden="true">❦</span>
+
+  @if (lang() === 'ar') {
+    <h2 class="cine-heading" dir="rtl" lang="ar">العد التنازلي ليومنا المميز</h2>
+  } @else {
+    <h2 class="cine-heading" lang="en">Counting Down to Our Special Day</h2>
+  }
+
+  @if (hasArrived()) {
+    @if (lang() === 'ar') {
+      <p class="cine-text" dir="rtl" lang="ar">اليوم هو اليوم المنتظر، أهلاً بكم!</p>
+    } @else {
+      <p class="cine-text" lang="en">Today is the day — welcome!</p>
+    }
+  } @else {
+    <div class="countdown-row" [attr.dir]="lang() === 'ar' ? 'rtl' : 'ltr'">
+      <div class="countdown-box">
+        <span class="num">{{ days() }}</span>
+        <span class="unit" [attr.lang]="lang()">{{ lang() === 'ar' ? 'أيام' : 'Days' }}</span>
+      </div>
+      <div class="countdown-box">
+        <span class="num">{{ hours() | number: '2.0-0' }}</span>
+        <span class="unit" [attr.lang]="lang()">{{ lang() === 'ar' ? 'ساعات' : 'Hours' }}</span>
+      </div>
+      <div class="countdown-box">
+        <span class="num">{{ minutes() | number: '2.0-0' }}</span>
+        <span class="unit" [attr.lang]="lang()">{{ lang() === 'ar' ? 'دقائق' : 'Minutes' }}</span>
+      </div>
+    </div>
+  }
+</app-cinematic-section>

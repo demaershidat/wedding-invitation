@@ -1,0 +1,47 @@
+<app-cinematic-section image="/images/gothic-light.jpg" [dust]="true" [blur]="true">
+  <span class="cine-motif" aria-hidden="true">❦</span>
+
+  @if (lang() === 'ar') {
+    <p class="cine-text" dir="rtl" lang="ar">يسعدنا أن نشاركم فرحتنا في يوم زفافنا</p>
+  } @else {
+    <p class="cine-text" lang="en">We would be honored to have you share in our joy on our wedding day.</p>
+  }
+
+  <div class="detail-panel" [attr.dir]="lang() === 'ar' ? 'rtl' : 'ltr'">
+    <div class="detail-row">
+      <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+        <rect x="3.5" y="5" width="17" height="15.5" rx="2" />
+        <path d="M3.5 9.5h17M8 3v4M16 3v4" />
+      </svg>
+      @if (lang() === 'ar') {
+        <span class="detail-text" lang="ar">الخميس، 29 تشرين الأول 2026</span>
+      } @else {
+        <span class="detail-text" lang="en">Thursday, October 29, 2026</span>
+      }
+    </div>
+
+    <div class="detail-row">
+      <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+        <circle cx="12" cy="12" r="8.25" />
+        <path d="M12 7.5V12l3 2" />
+      </svg>
+      @if (lang() === 'ar') {
+        <span class="detail-text" lang="ar">من الساعة 6:00 حتى 8:00 مساءً</span>
+      } @else {
+        <span class="detail-text" lang="en">6:00 PM – 8:00 PM</span>
+      }
+    </div>
+
+    <div class="detail-row">
+      <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+        <path d="M12 21s-6.75-6.2-6.75-11.25a6.75 6.75 0 1 1 13.5 0C18.75 14.8 12 21 12 21Z" />
+        <circle cx="12" cy="9.75" r="2.25" />
+      </svg>
+      @if (lang() === 'ar') {
+        <span class="detail-text" lang="ar">قاعة قصر النخيل، إربد</span>
+      } @else {
+        <span class="detail-text" lang="en">Qasr Al-Nakhil Hall, Irbid</span>
+      }
+    </div>
+  </div>
+</app-cinematic-section>

@@ -1,0 +1,20 @@
+<section class="cine" [class.is-visible]="visible()" [class.is-blurred]="blur">
+  <div class="cine-photo" [style.background-image]="'url(' + image + ')'"></div>
+
+  @if (dust) {
+    <div class="cine-dust" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+  }
+
+  @if (shimmer) {
+    <div class="cine-shimmer" aria-hidden="true"></div>
+  }
+
+  <div class="cine-scrim" aria-hidden="true"></div>
+
+  <div class="cine-content">
+    <ng-content></ng-content>
+  </div>
+</section>

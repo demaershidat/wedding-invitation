@@ -1,0 +1,11 @@
+<app-cinematic-section image="/images/beach-wave.jpg" [shimmer]="true" [blur]="true">
+  <span class="cine-motif" aria-hidden="true">❦</span>
+
+  @if (lang() === 'ar') {
+    <p class="cine-text" dir="rtl" lang="ar">بانتظار أن نحتفل بهذه البداية الجميلة معكم</p>
+    <p class="closing-names" dir="rtl" lang="ar">خلف <span class="amp">&amp;</span> لينا</p>
+  } @else {
+    <p class="cine-text" lang="en">We can't wait to celebrate this beautiful beginning with you.</p>
+    <p class="closing-names" lang="en">Khalf <span class="amp">&amp;</span> Leena</p>
+  }
+</app-cinematic-section>

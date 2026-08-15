@@ -1,0 +1,26 @@
+:host {
+  display: block;
+}
+
+.closing-names {
+  margin-top: 0.5rem;
+  color: #fdf6e6;
+  text-shadow: 0 2px 16px rgba(20, 13, 7, 0.55);
+}
+
+.closing-names:lang(ar) {
+  font-family: 'Amiri', serif;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 6vw, 2.1rem);
+}
+
+.closing-names:lang(en) {
+  font-family: 'Alex Brush', cursive;
+  font-size: clamp(1.8rem, 7vw, 2.4rem);
+}
+
+.closing-names .amp {
+  color: #f0dfb8;
+  font-size: 0.8em;
+  margin: 0 0.15em;
+}

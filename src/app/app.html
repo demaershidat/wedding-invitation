@@ -1,0 +1,119 @@
+<!-- preload="none": nothing is fetched until openInvitation() calls play() -->
+<audio #bgMusic src="/audio/background-music.mp3" preload="none" (timeupdate)="onMusicTimeUpdate()" hidden></audio>
+
+<!-- persists above every section, not just the hero, so the language is always one tap away -->
+<button
+  class="lang-toggle"
+  type="button"
+  (click)="toggleLanguage()"
+  [attr.aria-label]="lang() === 'ar' ? 'Switch to English' : 'التبديل إلى العربية'"
+>
+  {{ lang() === 'ar' ? 'EN' : 'ع' }}
+</button>
+
+<div class="scene" [attr.data-stage]="stage()">
+  <!-- the letter, filling the whole screen behind the envelope -->
+  <section class="letter" [attr.aria-hidden]="stage() !== 'open'">
+    <div class="letter-photo" aria-hidden="true"></div>
+    <div class="letter-light" aria-hidden="true"></div>
+    <div class="letter-shimmer" aria-hidden="true"></div>
+    <div class="letter-scrim" aria-hidden="true"></div>
+    <div class="petals" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <span class="letter-motif" aria-hidden="true">❦</span>
+    @if (lang() === 'ar') {
+      <p class="letter-overline" lang="ar" dir="rtl">حفل زفاف</p>
+      <h1 class="letter-names" lang="ar" dir="rtl">خلف <span class="amp-ar">&amp;</span> لينا</h1>
+      <p class="letter-sub" lang="ar" dir="rtl">كونوا معنا في بداية الأبد</p>
+    } @else {
+      <p class="letter-overline" lang="en">A Wedding Celebration</p>
+      <h1 class="letter-names" lang="en">Khalf <span class="amp">&amp;</span> Leena</h1>
+      <p class="letter-sub" lang="en">Join us as we begin our forever</p>
+    }
+
+    <div class="scroll-cue" [class.show]="stage() === 'open'" aria-hidden="true">
+      <span [attr.lang]="lang()">{{ lang() === 'ar' ? 'مرر' : 'Scroll' }}</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 4v15M6 13l6 6 6-6" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- magic dust, drifting in front of everything -->
+  <div class="ambient" aria-hidden="true">
+    @for (i of sparkles; track i) {
+      <span class="spark" [style.--i]="i"></span>
+    }
+  </div>
+
+  <!-- the closed envelope: full-bleed photo that lifts away like a lid -->
+  <button
+    class="envelope-flap"
+    type="button"
+    (click)="openInvitation()"
+    [disabled]="stage() !== 'closed'"
+    aria-label="Tap the seashell seal to open your invitation"
+  >
+    <span class="rays" aria-hidden="true"></span>
+    <span class="ring ring-a" aria-hidden="true"></span>
+    <span class="ring ring-b" aria-hidden="true"></span>
+    <span class="seal-glow" aria-hidden="true"></span>
+    <span class="burst" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </span>
+    <span class="glints" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </span>
+  </button>
+
+  <div class="flash" aria-hidden="true"></div>
+
+  <!-- intro chrome layered on top of the photo -->
+  <div class="intro" [class.fade]="stage() !== 'closed'" [attr.dir]="lang() === 'ar' ? 'rtl' : 'ltr'">
+    <p class="kicker" [attr.lang]="lang()">{{ lang() === 'ar' ? 'دعوة زفاف' : 'A Wedding Invitation' }}</p>
+    <div class="intro-bottom">
+      <button
+        class="open-btn"
+        type="button"
+        (click)="openInvitation()"
+        [disabled]="stage() !== 'closed'"
+        [attr.lang]="lang()"
+      >
+        <span>{{ lang() === 'ar' ? 'افتحوا الدعوة' : 'Open Invitation' }}</span>
+      </button>
+      <p class="hint" [attr.lang]="lang()">
+        {{ lang() === 'ar' ? 'اضغطوا على ختم الصدفة، أو الزر أعلاه' : 'tap the seashell seal, or the button above' }}
+      </p>
+    </div>
+  </div>
+
+  <button
+    class="sound-toggle"
+    type="button"
+    (click)="toggleSound()"
+    [attr.aria-pressed]="soundOn()"
+    [attr.aria-label]="soundOn() ? 'Mute sound' : 'Unmute sound'"
+  >
+    @if (soundOn()) {
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+        <path d="M4 9v6h4l5 4V5L8 9H4Z" />
+        <path d="M17 8.5a5 5 0 0 1 0 7" />
+        <path d="M19.5 6a8.5 8.5 0 0 1 0 12" />
+      </svg>
+    } @else {
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+        <path d="M4 9v6h4l5 4V5L8 9H4Z" />
+        <path d="m17 9 4 6M21 9l-4 6" />
+      </svg>
+    }
+  </button>
+</div>
+
+<app-countdown-section />
+<app-details-section />
+<app-closing-section />
