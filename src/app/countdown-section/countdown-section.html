@@ -27,6 +27,10 @@
         <span class="num">{{ minutes() | number: '2.0-0' }}</span>
         <span class="unit" [attr.lang]="lang()">{{ lang() === 'ar' ? 'دقائق' : 'Minutes' }}</span>
       </div>
+      <div class="countdown-box">
+        <span class="num">{{ seconds() | number: '2.0-0' }}</span>
+        <span class="unit" [attr.lang]="lang()">{{ lang() === 'ar' ? 'ثواني' : 'Seconds' }}</span>
+      </div>
     </div>
   }
 </app-cinematic-section>

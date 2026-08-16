@@ -1,5 +1,7 @@
-<section class="cine" [class.is-visible]="visible()" [class.is-blurred]="blur">
-  <div class="cine-photo" [style.background-image]="'url(' + image + ')'"></div>
+<section class="cine" [class.is-visible]="visible()" [class.is-blurred]="blur" [class.no-photo]="!image">
+  @if (image) {
+    <div class="cine-photo" [style.background-image]="'url(' + image + ')'"></div>
+  }
 
   @if (dust) {
     <div class="cine-dust" aria-hidden="true">

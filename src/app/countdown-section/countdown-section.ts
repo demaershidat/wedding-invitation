@@ -28,4 +28,5 @@ export class CountdownSection {
   protected readonly days = computed(() => Math.floor(this.remainingMs() / 86_400_000));
   protected readonly hours = computed(() => Math.floor((this.remainingMs() % 86_400_000) / 3_600_000));
   protected readonly minutes = computed(() => Math.floor((this.remainingMs() % 3_600_000) / 60_000));
+  protected readonly seconds = computed(() => Math.floor((this.remainingMs() % 60_000) / 1_000));
 }

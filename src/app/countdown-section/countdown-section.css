@@ -4,7 +4,7 @@
 
 .countdown-row {
   display: flex;
-  gap: clamp(0.5rem, 2.5vw, 1rem);
+  gap: clamp(0.4rem, 2vw, 1rem);
   margin-top: 0.9rem;
 }
 
@@ -13,8 +13,8 @@
   flex-direction: column;
   align-items: center;
   gap: 0.3rem;
-  min-width: 4.6rem;
-  padding: 1rem 0.5rem 0.85rem;
+  min-width: 4rem;
+  padding: 1rem 0.4rem 0.85rem;
   border-radius: 14px;
   border: 1px solid rgba(255, 246, 224, 0.35);
   background: rgba(40, 28, 16, 0.3);
@@ -25,7 +25,7 @@
 .num {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 600;
-  font-size: clamp(1.9rem, 7.5vw, 2.5rem);
+  font-size: clamp(1.6rem, 6.5vw, 2.5rem);
   line-height: 1;
   color: #fdf6e6;
   text-shadow: 0 2px 14px rgba(20, 13, 7, 0.6);

@@ -12,7 +12,9 @@ import { AfterViewInit, Component, DestroyRef, ElementRef, inject, Input, signal
   styleUrl: './cinematic-section.css',
 })
 export class CinematicSection implements AfterViewInit {
-  @Input({ required: true }) image!: string;
+  /** Omit when an ancestor already paints a shared background behind this section
+   *  (see the verse section, which sits over the hero's pinned garden photo). */
+  @Input() image?: string;
   @Input() shimmer = false;
   @Input() dust = false;
   /** Soft-focuses the photo so it reads as an atmospheric backdrop rather than a sharp,

@@ -16,6 +16,11 @@
   scroll-snap-align: start;
 }
 
+/* no local image — an ancestor is painting a shared background behind this section */
+.cine.no-photo {
+  background: transparent;
+}
+
 /* the photo, given a slow cinematic push-in once it scrolls into view */
 .cine-photo {
   position: absolute;
@@ -140,6 +145,25 @@
       rgba(13, 9, 5, 0.08) 55%,
       rgba(13, 9, 5, 0.2) 78%,
       rgba(13, 9, 5, 0.8) 100%
+    );
+}
+
+/* no local photo means there's nothing to blend at the top edge — a shared photo already
+   continues in from the section above, so don't re-darken it there too; keep the bottom
+   band for the handoff into whatever (different) photo comes after this section. */
+.cine.no-photo .cine-scrim {
+  background: radial-gradient(
+      ellipse 70% 55% at 50% 50%,
+      rgba(20, 13, 7, 0.5) 0%,
+      rgba(20, 13, 7, 0.22) 55%,
+      rgba(20, 13, 7, 0.06) 100%
+    ),
+    linear-gradient(
+      to top,
+      rgba(13, 9, 5, 0.78) 0%,
+      rgba(13, 9, 5, 0.12) 24%,
+      rgba(13, 9, 5, 0.04) 55%,
+      rgba(13, 9, 5, 0.04) 100%
     );
 }
 
