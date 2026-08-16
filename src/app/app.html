@@ -1,10 +1,4 @@
-<audio
-  #bgMusic
-  src="/audio/background-music.mp3"
-  preload="auto"
-  (timeupdate)="onMusicTimeUpdate()"
-  hidden
-></audio>
+<audio #bgMusic src="/audio/background-music.mp3" preload="auto" loop hidden></audio>
 <!-- persists above every section, not just the hero, so the language is always one tap away -->
 <button
   class="lang-toggle"

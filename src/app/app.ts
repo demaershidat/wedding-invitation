@@ -22,9 +22,11 @@ export class App {
   protected readonly stage = signal<Stage>('closed');
   protected readonly soundOn = signal(true);
 
-  /** The background track only ever plays this window (1:15 - 2:42), then loops back to the start of it */
-  private readonly musicStart = 75;
-  private readonly musicEnd = 162;
+  /** The background track file is pre-trimmed to exactly the ~87s window that's meant to
+   *  loop (was previously a full ~9min song, seeked/reset by hand in JS on every play - now
+   *  the file itself is just the loop, so the browser can start playing it immediately from
+   *  frame zero and loop it natively, with far less to download before that first tap
+   *  actually produces sound). */
   private readonly bgMusic = viewChild<ElementRef<HTMLAudioElement>>('bgMusic');
 
   /** The real footage of the seal vanishing and the flap opening onto the garden, played
@@ -72,8 +74,13 @@ export class App {
       return;
     }
 
-    this.playChime();
+    // The music starts first, before anything else - including the chime's own
+    // AudioContext. Some mobile browsers only count a play() call as directly
+    // gesture-triggered while it's the very next thing that happens after the tap, so
+    // any synchronous work ahead of it (however small) risks the call getting silently
+    // blocked instead.
     this.startBackgroundMusic();
+    this.playChime();
     document.body.classList.add('invitation-open'); // unlocks scroll past the hero
 
     // The wax seal cracks and drops away, and the screen flashes fully white...
@@ -155,9 +162,6 @@ private startBackgroundMusic(): void {
 
   audio.muted = !this.soundOn();
 
-  // Start from 1:15
-  audio.currentTime = this.musicStart;
-
   const playPromise = audio.play();
 
   if (playPromise !== undefined) {
@@ -170,14 +174,6 @@ private startBackgroundMusic(): void {
       });
   }
 }
-
-  /** Keeps playback boxed inside the 1:15-2:42 window, looping back to the start once it reaches the end */
-  protected onMusicTimeUpdate(): void {
-    const audio = this.bgMusic()?.nativeElement;
-    if (audio && audio.currentTime >= this.musicEnd) {
-      audio.currentTime = this.musicStart;
-    }
-  }
 
   private playChime(): void {
     if (!this.soundOn()) {
